@@ -4,6 +4,7 @@ const card = document.querySelector('.card');
 const details = document.querySelector('.details');
 const time = document.querySelector('img.time');
 const icon = document.querySelector('.icon img');
+const forecast = new Forecast();
 
 // function to update ui
 const updateUI = (data) => {
@@ -34,24 +35,14 @@ const updateUI = (data) => {
   }
 };
 
-// function to use city name to get city weather
-const updateCity = async (city) => {
-  console.log(city);  //del
-  const cityDets = await getCity(city);
-  const weather = await getWeather(cityDets.Key);
-  // object shorthand notation (same field name and variable name)
-  return { cityDets, weather };
-};
-
 // get city name upon submit and call function
 cityForm.addEventListener('submit', e => {
-  // prevent default action
   e.preventDefault();
   // get city name (value)
   const city = cityForm.city.value.trim();
   cityForm.reset();
   // update the ui with new city
-  updateCity(city)
+  forecast.updateCity(city)
     .then(data => updateUI(data))
     .catch(err => console.log(err));
   // set local storage
@@ -60,7 +51,7 @@ cityForm.addEventListener('submit', e => {
 
 // check for city name in local storage
 if(localStorage.getItem('city')){
-  updateCity(localStorage.getItem('city')) 
+  forecast.updateCity(localStorage.getItem('city')) 
     .then(data => updateUI(data))
     .catch(err => console.log(err)); 
 }
