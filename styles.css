@@ -1,0 +1,15 @@
+body{
+    background: #eeedec;
+    letter-spacing: 0.2em;
+    font-size: 0.8em;
+}
+.container{
+    max-width: 400px;
+}
+.icon{
+    position: relative;
+    background-color: rgb(238, 237, 237);
+}
+.temperature{
+    font-size: xx-large;
+}
